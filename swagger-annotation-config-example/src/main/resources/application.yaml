@@ -1,0 +1,23 @@
+#springdoc:
+#  api-docs:
+#    path: /mypath # For customizing path to swagger json
+#  swagger-ui:
+#    enabled: false # This will disable the swagger ui, however, api-docs json will still be available at its endpoint
+#  use-management-port: true
+#  show-actuator: true # it shows actuator endpoints also on swagger doc
+
+
+
+#management:
+#  server:
+#    port: 9090
+#  endpoints:
+#    web:
+#      exposure:
+#        include: openapi, swagger-ui
+#      path-mapping:
+#        openapi: mypath # customizing actuator endpoint for swagger
+
+
+
+

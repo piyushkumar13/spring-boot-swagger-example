@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: My Swagger Apis
+  description: This project contains set of sample apis depicting swagger usage
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /students/{id}:
+    post:
+      tags:
+        - sample-controller
+        - POST
+      summary: Post Student
+      description: Create student record
+      operationId: createStudent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            maxLength: 2147483647
+            minLength: 3
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /students:
+    get:
+      tags:
+        - sample-controller
+        - GET
+      summary: Get Students
+      description: Returns list of students
+      operationId: getStudents
+      parameters:
+        - name: pagesize
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: X-request-id
+          in: header
+          description: provide my custom header
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal server error
+        "400":
+          description: Bad request
+        "200":
+          description: Returns successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+security:
+  - httpBasic: []
+
+components:
+  schemas:
+    Student:
+      required:
+        - college
+        - course
+        - name
+        - rollNo
+        - subjects
+      type: object
+      properties:
+        registrationNo:
+          type: integer
+          format: int32
+        rollNo:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        college:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        city:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        state:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        course:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        subjects:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    httpBasic:
+      type: http
+      description: Authn & Authz for the application
+      in: header
+      scheme: basic
